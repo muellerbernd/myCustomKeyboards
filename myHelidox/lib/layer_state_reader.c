@@ -38,7 +38,7 @@ const char *read_layer_state(void)
             break;
         default:
             snprintf(layer_state_str, sizeof(layer_state_str),
-                     "Layer: Undef-%ld", layer_state);
+                     "Layer: Undef-%d", layer_state);
     }
 
     return layer_state_str;

@@ -16,7 +16,7 @@ BOOTLOADER = caterina
 #
 BOOTMAGIC_ENABLE = no      # Virtual DIP switch configuration
 MOUSEKEY_ENABLE = no       # Mouse keys
-EXTRAKEY_ENABLE = yes       # Audio control and System control
+EXTRAKEY_ENABLE = no       # Audio control and System control
 CONSOLE_ENABLE = no         # Console for debug
 COMMAND_ENABLE = no        # Commands for debug and configuration
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
@@ -27,7 +27,7 @@ BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality on B7 by d
 MIDI_ENABLE = no            # MIDI support
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 AUDIO_ENABLE = no           # Audio output on port C6
-RGBLIGHT_ENABLE = yes       # Enable WS2812 RGB underlight.
+RGBLIGHT_ENABLE = no       # Enable WS2812 RGB underlight.
 KEY_LOCK_ENABLE = no
 TERMINAL_ENABLE = no
 SWAP_HANDS_ENABLE = no
@@ -36,16 +36,9 @@ SPLIT_KEYBOARD = yes
 # Disable unsupported hardware
 AUDIO_SUPPORTED = no
 BACKLIGHT_SUPPORTED = no
+CAT_ENABLE = yes
 
 UNICODE_ENABLE = no         # Unicode
 
 LTO_ENABLE = yes            # significantly reduce the compiled size, but disable the legacy TMK Macros and Functions features
 EXTRAFLAGS += -flto
-# If you want to change the display of OLED, you need to change here
-SRC += ./lib/keylogger.c \
-	./lib/layer_state_reader.c \
-	./lib/logo_reader.c \
-	# ./lib/rgb_state_reader.c \
-	# ./lib/mode_icon_reader.c \
-	# ./lib/host_led_state_reader.c \
-	# ./lib/timelogger.c \

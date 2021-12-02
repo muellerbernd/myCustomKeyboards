@@ -1,14 +1,12 @@
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
 #include <stdio.h>
-char wpm_str[10];
+char wpm_str[8];
 // Each layer gets a name for readability, which is then used in the keymap
 // matrix below. The underscores don't mean anything - you can have a layer
 // called STUFF or any other name. Layer names don't all need to be of the same
 // length, obviously, and you can also skip them entirely and just use numbers.
-
-enum custom_layers
-{
+enum custom_layers {
     _QWERTZ,
     _DVORAK,
     _LOWER,
@@ -17,8 +15,7 @@ enum custom_layers
     _ADJUST,
 };
 
-enum custom_keycodes
-{
+enum custom_keycodes {
     QWERTZ = SAFE_RANGE,
     DVORAK,
     LOWER,
@@ -27,37 +24,21 @@ enum custom_keycodes
     ADJUST,
 };
 
-enum
-{
+enum {
     TD_R = 0
     /** TD_LY = 1 */
 };
-
-// combos
-/** const uint16_t PROGMEM ae_combo[] = {DE_A, DE_E, COMBO_END}; */
-/** const uint16_t PROGMEM ue_combo[] = {DE_U, DE_E, COMBO_END}; */
-/** const uint16_t PROGMEM oe_combo[] = {DE_O, DE_E, COMBO_END}; */
-/** combo_t key_combos[COMBO_COUNT] = { */
-/**     COMBO(ae_combo, DE_AE), */
-/**     COMBO(oe_combo, DE_OE), */
-/**     COMBO(ue_combo, DE_UE), */
-/** }; */
 
 #define KC_NAGR LT(_NAV, KC_ESC)
 
 #define KC_ADAP LT(_ADJUST, KC_APP)
 
-#define KC_CTAB CTL_T(KC_TAB)
-#define KC_ALPI ALT_T(PIPE)
-
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 #define KC_NAV MO(_NAV)
 
-#define KC_DV TG(_DVORAK)
-
 // aliases for clarity in layering
-#define CENT LCTL_T(KC_ENT)
+/** #define CENT LCTL_T(KC_ENT) */
 /** #define BSCTL LCTL_T(KC_BSPC) // Ctrl when held, Backspace when tapped */
 #define CTAB LCTL_T(KC_TAB)
 #define ATPI LALT_T(DE_PIPE)
@@ -76,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |Shift |   Y  |   X  |   C  |   V  |   B  |         |   N  |   M  |   ,  |   .  |   -  |Shift |
  * .-----------------------------------------.         .-----------------------------------------.
  *                                       .------.   .-----.
- *                                       | CTL  |   | ALT |
+ *                                       | TABD |   |TABU |
  *                    .------------------.------.   .-----.--------------------
  *                    |NAV  |  WIN |LOWER| Space|   |Enter| RAISE|ADJUST|  NAV|
  *                    .-------------------------.   .-------------------------.
@@ -89,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // |-------+-------+-------+-------+-------+-------.         ,-------+-------+-------+-------+-------+-------|
     KC_LSFT,   DE_Y,   DE_X,   DE_C,   DE_V,   DE_B,             DE_N,   DE_M,DE_COMM, DE_DOT,DE_MINS,KC_RSFT,
 // '-------+-------+-------+-------+-------+-------.         ,-------+-------+-------+-------+-------+-------'
-            KC_NAV ,KC_LGUI, LOWER , KC_SPC,KC_LCTL,          KC_LALT,KC_ENT , RAISE ,KC_ADAP,KC_NAV
+            KC_NAV ,KC_LGUI, LOWER , KC_SPC,   TABD,             TABU, KC_ENT, RAISE ,KC_ADAP,KC_NAV
                         // `-------+-------+-------`         `-------+-------+-------`
    ),
 
@@ -128,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |   '  |   "  |   |  |   /  |   {  |         |   }  |   \  |   !  |   ?  |   #  |   *  |
  * .-----------------------------------------.         .-----------------------------------------.
  *                                       .------.   .-----.
- *                                       | CTL  |   | ALT |
+ *                                       | TABD |   |TABU|
  *                    .------------------.------.   .-----.--------------------
  *                    |NAV  |  WIN |LOWER| Space|   |Enter| RAISE|ADJUST|  NAV|
  *                    .-------------------------.   .-------------------------.
@@ -136,11 +117,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT(
  // ,-------+-------+-------+-------+-------+-------.         ,-------+-------+-------+-------+-------+-------.
-     DE_UNDS,  DE_AT, DE_DLR,DE_EURO,DE_PERC,DE_LPRN,          DE_RPRN,  DE_UE, DE_GRV,  DE_OE, DE_EQL,DE_MINS,
+     DE_UNDS,  DE_AT, DE_DLR,DE_EURO,DE_PERC,DE_LPRN,          DE_RPRN,DE_UDIA, DE_GRV,DE_ODIA, DE_EQL,DE_MINS,
  // |-------+-------+-------+-------+-------+-------.         ,-------+-------+-------+-------+-------+-------|
-     _______,  DE_AE,  DE_SS,DE_CIRC,DE_LESS,DE_LBRC,          DE_RBRC,DE_MORE,DE_PARA,DE_AMPR,DE_TILD,DE_PLUS,
+     _______,DE_ADIA,  DE_SS,DE_CIRC,DE_LABK,DE_LBRC,          DE_RBRC,DE_RABK,DE_SECT,DE_AMPR,DE_TILD,DE_PLUS,
  // |-------+-------+-------+-------+-------+-------.         ,-------+-------+-------+-------+-------+-------|
-     _______,DE_QUOT,DE_DQUO,DE_PIPE,DE_SLSH,DE_LCBR,          DE_RCBR,DE_BSLS,DE_EXLM, DE_QST,DE_HASH,DE_ASTR,
+     _______,DE_QUOT,DE_DQUO,DE_PIPE,DE_SLSH,DE_LCBR,          DE_RCBR,DE_BSLS,DE_EXLM,DE_QUES,DE_HASH,DE_ASTR,
  // '-------+-------+-------+-------+-------+-------.         ,-------+-------+-------+-------+-------+-------'
             _______,_______,_______,_______,_______,          _______,_______,_______,_______,_______
                            // `-------+-------+-------`     `-------+-------+-------`
@@ -164,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // |-------+-------+-------+-------+-------+-------.         ,-------+-------+-------+-------+-------+-------|
     XXXXXXX,XXXXXXX,XXXXXXX,RGB_HUD,RGB_SAD,RGB_VAD,          XXXXXXX,KC_BRID,KC_VOLD,KC_BRIU,XXXXXXX,XXXXXXX,
 // |-------+-------+-------+-------+-------+-------.         ,-------+-------+-------+-------+-------+-------|
-    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,          QWERTZ ,KC_DV  ,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+    XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,          QWERTZ ,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
 // '-------+-------+-------+-------+-------+-------.         ,-------+-------+-------+-------+-------+-------'
             _______,_______,_______,KC_MPLY,_______,          _______,_______,_______,_______,_______
                           // `-------+-------+-------`     `-------+-------+-------`
@@ -175,21 +156,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /** void matrix_init_user(void) { set_single_persistent_default_layer(_QWERTZ);
  * }; */
 
-void safe_reset(qk_tap_dance_state_t *state, void *user_data)
+void safe_reset(qk_tap_dance_state_t* state, void* user_data)
 {
-    if (state->count >= 3)
-    {
+    if (state->count >= 3) {
         // Reset the keyboard if you tap the key more than three times
         reset_keyboard();
         reset_tap_dance(state);
-    }
-    else
-    {
+    } else {
         /** register_code(KC_LSFT); */
     }
 }
 
-void dance_cln_reset(qk_tap_dance_state_t *state, void *user_data)
+void dance_cln_reset(qk_tap_dance_state_t* state, void* user_data)
 {
     /** if (state->count != 3) { */
     /** unregister_code(KC_LSFT); */
@@ -259,24 +237,24 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     /** ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_layers, dance_layers_finish) */
 };
 
-// SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in
+// SSD1306 OLED update loop, make sure to enable OLED_ENABLE=yes in
 // rules.mk
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation)
 {
     if (!is_keyboard_master())
-        return OLED_ROTATION_180; // flips the display 180 degrees if offhand
+        /** return OLED_ROTATION_180; // flips the display 180 degrees if offhand */
+        return OLED_ROTATION_90;
     return rotation;
 }
-
 // When you add source files to SRC in rules.mk, you can use functions.
-const char *read_layer_state(void);
+const char* read_layer_state(void);
 
-const char *read_logo(void);
-void set_keylog(uint16_t keycode, keyrecord_t *record);
-const char *read_keylog(void);
-const char *read_keylogs(void);
+/** const char* read_logo(void); */
+void set_keylog(uint16_t keycode, keyrecord_t* record);
+const char* read_keylog(void);
+/** const char* read_keylogs(void); */
 
 // const char *read_mode_icon(bool swap);
 // const char *read_host_led_state(void);
@@ -284,91 +262,138 @@ const char *read_keylogs(void);
 // const char *read_timelog(void);
 
 #ifdef WPM_ENABLE
+/* Animation bit by j-inc https://github.com/qmk/qmk_firmware/tree/master/keyboards/kyria/keymaps/j-inc */
 // WPM-responsive animation stuff here
-#define IDLE_FRAMES 1
-#define IDLE_SPEED 20 // below this wpm value your animation will idle
+#define BONGO_IDLE_FRAMES 2
+#define BONGO_IDLE_SPEED 40 // below this wpm value your animation will idle
 
 // #define PREP_FRAMES 1 // uncomment if >1
 
-#define TAP_FRAMES 2
-#define TAP_SPEED 30 // above this wpm value typing animation to trigger
+#define BONGO_TAP_FRAMES 2
+#define BONGO_TAP_SPEED 60 // above this wpm value typing animation to triggere
 
-#define ANIM_FRAME_DURATION 200 // how long each frame lasts in ms
-// #define SLEEP_TIMER 60000 // should sleep after this period of 0 wpm, needs
-// fixing
-#define ANIM_SIZE                                                              \
-    513 // number of bytes in array, minimize for adequate firmware size, max is
-        // 1024
+#define BONGO_ANIM_FRAME_DURATION 100 // how long each frame lasts in ms
+// #define SLEEP_TIMER 60000 // should sleep after this period of 0 wpm, needs fixing
+#define BONGO_ANIM_SIZE 320 // number of bytes in array, minimize for adequate firmware size, max is 1024
 
-uint32_t anim_timer = 0;
-uint32_t anim_sleep = 0;
-uint8_t current_idle_frame = 0;
+uint32_t bongo_anim_timer = 0;
+uint32_t bongo_anim_sleep = 0;
+uint8_t bongo_current_idle_frame = 0;
 // uint8_t current_prep_frame = 0; // uncomment if PREP_FRAMES >1
-uint8_t current_tap_frame = 0;
+uint8_t bongo_current_tap_frame = 0;
 
-// Code containing pixel art, contains:
-// 2 idle frames, 1 prep frame, and 2 tap frames
-
-// To make your own pixel art:
-// save a png/jpeg of an 128x32 image (resource: https://www.pixilart.com/draw )
-// follow this guide up to and including "CONVERT YOUR IMAGE"
-// https://docs.splitkb.com/hc/en-us/articles/360013811280-How-do-I-convert-an-image-for-use-on-an-OLED-display-
-// replace numbers in brackets with your own
-// if you start getting errors when compiling make sure you didn't accedentally
-// delete a bracket
-static void render_anim(void)
+// Implementation credit j-inc(/James Incandenza), pixelbenny, and obosob.
+// Bongo cat images changed and adapted for sofle keyboard oled size.
+// Original gif can be found here: https://www.pixilart.com/art/bongo-cat-bd2a8e9323aa705
+static void bongo_render_anim(void)
 {
+    // clang-format off
+    static const char PROGMEM idle[BONGO_IDLE_FRAMES][BONGO_ANIM_SIZE] = {
+        {
+        0x00, 0xc0, 0x3e, 0x01, 0x00, 0x00, 0x00, 0xc0, 0xfc, 0x03, 0x00, 0x03, 0x0c, 0x30, 0xc0, 0x00,
+        0xe1, 0x1e, 0x00, 0xc0, 0xbc, 0x83, 0x80, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x3c, 0x03, 0x00, 0x00, 0x00, 0x80, 0x78, 0x87, 0x00, 0x03, 0x0c, 0x30, 0xc0, 0x00, 0xe0, 0x1f,
+        0x01, 0xc0, 0x3c, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x31, 0x05, 0x41, 0x12, 0x04,
+        0x00, 0x00, 0x00, 0x00, 0xf8, 0x87, 0x00, 0x01, 0x06, 0x18, 0x60, 0x80, 0xc0, 0x3f, 0x03, 0x80,
+        0x78, 0x07, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x01, 0x01, 0x03, 0x05,
+        0x00, 0x00, 0xf0, 0xcf, 0x00, 0x01, 0x06, 0x18, 0x60, 0x80, 0x80, 0x79, 0x07, 0x80, 0x78, 0x07,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x38, 0x38, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0xe0, 0x1e, 0x01, 0x00, 0x03, 0x0c, 0x30, 0xc0, 0x00, 0xf9, 0x07, 0x80, 0x78, 0x07, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0xc0, 0x2c, 0x32, 0x22, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x07, 0x03, 0x0c, 0x30, 0xc0, 0x00, 0x00, 0xf0, 0x0f, 0x80, 0x78, 0x07, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x18, 0x60, 0x80, 0x00, 0x00, 0xe1, 0x1e, 0x01, 0xf0, 0x8f, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00,
+        0x0e, 0x0e, 0x0e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x08, 0x08, 0x09, 0x0e, 0x0e, 0x01, 0xf0, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x19,
+        0x19, 0x41, 0x0a, 0x22, 0x84, 0x78, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x60, 0x18,
+        0x00, 0x00, 0x00, 0x00, 0xf0, 0x0f, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02,
+        0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x09, 0x70, 0x80,
+        0x00, 0x00, 0xf0, 0x1f, 0x10, 0x10, 0x10, 0x10, 0x10, 0x08, 0x08, 0x08, 0x04, 0x04, 0x02, 0x02,
+        0x01, 0x01, 0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x04, 0x02, 0x01,
+        }
+    };
+    static const char PROGMEM tap[BONGO_TAP_FRAMES][BONGO_ANIM_SIZE] = {
+        {
+        0x00, 0xc0, 0x3e, 0x01, 0x00, 0x00, 0x00, 0xc0, 0xfc, 0xff, 0xff, 0xff, 0x7c, 0x70, 0x40, 0x40,
+        0x61, 0x5e, 0x80, 0xc0, 0xbc, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x3c, 0x03, 0x00, 0x00, 0x00, 0x80, 0x78, 0x87, 0x00, 0x03, 0x0f, 0x3f, 0xf8, 0xf0, 0xf0, 0x20,
+        0x40, 0x80, 0x80, 0x00, 0x00, 0x01, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0xf8, 0x87, 0x00, 0x01, 0x06, 0x18, 0x60, 0x80, 0xc0, 0x3f, 0x03, 0x80,
+        0x78, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x04,
+        0x00, 0x00, 0xf0, 0xcf, 0x00, 0x01, 0x06, 0x18, 0x60, 0x80, 0x80, 0x79, 0x07, 0x80, 0x78, 0x07,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x38, 0x38, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0xe0, 0x1e, 0x01, 0x00, 0x03, 0x0c, 0x30, 0xc0, 0x00, 0xf9, 0x07, 0x80, 0x78, 0x07, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0xc0, 0x2c, 0x32, 0x22, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x07, 0x03, 0x0c, 0x30, 0xc0, 0x00, 0x00, 0xf0, 0x0f, 0x80, 0x78, 0x07, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x18, 0x60, 0x80, 0x00, 0x00, 0xe1, 0x1e, 0x01, 0xf0, 0x8f, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00,
+        0x0e, 0x0e, 0x0e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x08, 0x08, 0x09, 0x0e, 0x0e, 0x01, 0xf0, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x19,
+        0x19, 0x41, 0x0a, 0x22, 0x84, 0x78, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x60, 0x18,
+        0x00, 0x00, 0x00, 0x00, 0xf0, 0x0f, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02,
+        0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x09, 0x70, 0x80,
+        0x00, 0x00, 0xf0, 0x1f, 0x10, 0x10, 0x10, 0x10, 0x10, 0x08, 0x08, 0x08, 0x04, 0x04, 0x02, 0x02,
+        0x01, 0x01, 0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x04, 0x02, 0x01,
+        },
+        {
+        0x00, 0xc0, 0x3e, 0x01, 0x00, 0x00, 0x00, 0xc0, 0xfc, 0x03, 0x00, 0x03, 0x0c, 0x30, 0xc0, 0x00,
+        0xe1, 0x1e, 0x00, 0xc0, 0xbc, 0x83, 0x80, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x3c, 0x03, 0x00, 0x00, 0x00, 0x80, 0x78, 0x87, 0x00, 0x03, 0x0c, 0x30, 0xc0, 0x00, 0xe0, 0x1f,
+        0x01, 0xc0, 0x3c, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x30, 0x31, 0x05, 0x41, 0x12, 0x04,
+        0x00, 0x00, 0x00, 0x00, 0xf8, 0x87, 0x00, 0x01, 0x06, 0x18, 0x60, 0x80, 0xc0, 0x3f, 0x03, 0x80,
+        0x78, 0x07, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x01, 0x01, 0x03, 0x05,
+        0x00, 0x00, 0xf0, 0xcf, 0x00, 0x01, 0x06, 0x18, 0x60, 0x80, 0x80, 0x79, 0x07, 0x80, 0x78, 0x07,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x38, 0x38, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0xe0, 0xfe, 0xff, 0xff, 0xff, 0xfc, 0xf0, 0xc0, 0x00, 0xf9, 0x07, 0x80, 0x78, 0x07, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0xc0, 0x2c, 0x32, 0x22, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x07, 0x03, 0x0f, 0x3f, 0xff, 0x03, 0x01, 0x03, 0x07, 0x18, 0xf8, 0x07, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x18, 0x60, 0x80, 0x00, 0x0f, 0xf0, 0x00, 0x00, 0x00, 0x00, 0x03, 0x3c, 0x00, 0x00, 0x00, 0x00,
+        0x0e, 0x0e, 0x0e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x08, 0x08, 0x09, 0x0e, 0x0e, 0x01, 0xf3, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x60, 0x18,
+        0x00, 0x00, 0x00, 0x00, 0xf0, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x09, 0x70, 0x80,
+        0x00, 0x00, 0xf0, 0x1f, 0x10, 0x10, 0x10, 0x10, 0x10, 0x08, 0x08, 0x08, 0x04, 0x04, 0x02, 0x02,
+        0x01, 0x01, 0x01, 0x01, 0x01, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x04, 0x02, 0x01
+        },
+    };
+    // clang-format on
 
     // assumes 1 frame prep stage
-    void animation_phase(void)
+    void bongo_animation_phase(void)
     {
-        /** if (get_current_wpm() <= IDLE_SPEED) */
-        /** { */
-        /**     current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES; */
-        /**     oled_write_raw_P(idle[abs((IDLE_FRAMES - 1) -
-         * current_idle_frame)], */
-        /**                      ANIM_SIZE); */
-        /** } */
-        /** if (get_current_wpm() > IDLE_SPEED && get_current_wpm() < TAP_SPEED)
-         */
-        /** { */
-        /**     //
-         * oled_write_raw_P(prep[abs((PREP_FRAMES-1)-current_prep_frame)], */
-        /**     // ANIM_SIZE); // uncomment if IDLE_FRAMES >1 */
-        /**     oled_write_raw_P(prep[0], ANIM_SIZE); // remove if IDLE_FRAMES
-         * >1 */
-        /** } */
-        /** if (get_current_wpm() >= TAP_SPEED) */
-        /** { */
-        /**     current_tap_frame = (current_tap_frame + 1) % TAP_FRAMES; */
-        /**     oled_write_raw_P(tap[abs((TAP_FRAMES - 1) - current_tap_frame)],
-         */
-        /**                      ANIM_SIZE); */
-        /** } */
-    }
-    if (get_current_wpm() != 000)
-    {
-        oled_on(); // not essential but turns on animation OLED with any alpha
-                   // keypress
-        if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION)
-        {
-            anim_timer = timer_read32();
-            animation_phase();
+        if (get_current_wpm() <= BONGO_IDLE_SPEED) {
+            /*
+            bongo_current_idle_frame = (bongo_current_idle_frame + 1) % BONGO_IDLE_FRAMES;
+            oled_write_raw_P(idle[abs((BONGO_IDLE_FRAMES-1)-bongo_current_idle_frame)], BONGO_ANIM_SIZE);
+            */
+            oled_write_raw_P(idle[0], BONGO_ANIM_SIZE);
         }
-        anim_sleep = timer_read32();
-    }
-    else
-    {
-        if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT)
-        {
-            oled_off();
+        /*
+         if(wpm_counter >BONGO_IDLE_SPEED && wpm_counter <BONGO_TAP_SPEED){
+             // oled_write_raw_P(prep[abs((PREP_FRAMES-1)-current_prep_frame)], BONGO_ANIM_SIZE); // uncomment if BONGO_IDLE_FRAMES >1
+             oled_write_raw_P(prep[0], BONGO_ANIM_SIZE);  // remove if BONGO_IDLE_FRAMES >1
+         }*/
+        if (get_current_wpm() >= BONGO_TAP_SPEED) {
+            bongo_current_tap_frame = (bongo_current_tap_frame + 1) % BONGO_TAP_FRAMES;
+            oled_write_raw_P(tap[abs((BONGO_TAP_FRAMES - 1) - bongo_current_tap_frame)], BONGO_ANIM_SIZE);
         }
-        else
-        {
-            if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION)
-            {
-                anim_timer = timer_read32();
-                animation_phase();
+    }
+    if (get_current_wpm() != 000) {
+        /** oled_on(); // not essential but turns on animation OLED with any alpha keypress */
+        if (timer_elapsed32(bongo_anim_timer) > BONGO_ANIM_FRAME_DURATION) {
+            bongo_anim_timer = timer_read32();
+            bongo_animation_phase();
+        }
+        bongo_anim_sleep = timer_read32();
+    } else {
+        if (timer_elapsed32(bongo_anim_sleep) > OLED_TIMEOUT) {
+            /** oled_off(); */
+        } else {
+            if (timer_elapsed32(bongo_anim_timer) > BONGO_ANIM_FRAME_DURATION) {
+                bongo_anim_timer = timer_read32();
+                bongo_animation_phase();
             }
         }
     }
@@ -377,96 +402,77 @@ static void render_anim(void)
 
 void oled_task_user(void)
 {
-    if (is_keyboard_master())
-    {
-        // If you want to change the display of OLED, you need to change here
+    if (is_keyboard_master()) {
         oled_write_ln(read_layer_state(), false);
         oled_write_ln(read_keylog(), false);
-        /** oled_write_ln(read_keylogs(), false); */
-    }
-    else
-    {
+    } else {
 #ifdef WPM_ENABLE
-        /** oled_write(read_logo(), false); */
-        render_anim(); // renders pixelart
+        bongo_render_anim();
+        oled_set_cursor(0, 12);
+        sprintf(wpm_str, "WPM\n%03d", get_current_wpm());
+        oled_write(wpm_str, false);
 
-        oled_set_cursor(0, 0); // sets cursor to (row, column) using charactar
-                               // spacing (5 rows on 128x32 screen, anything
-                               // more will overflow back to the top)
-        sprintf(
-            wpm_str, "WPM:%03d",
-            get_current_wpm()); // edit the string to change wwhat shows up,
-                                // edit %03d to change how many digits show up
-        oled_write(wpm_str, false); // writes wpm on top left corner of string
+        /** oled_write(read_logo(), false); */
+        /** bongo_render_anim(); // renders pixelart */
+        /**  */
+        /** oled_set_cursor(0, 0); // sets cursor to (row, column) using charactar */
+        /**                        // spacing (5 rows on 128x32 screen, anything */
+        /**                        // more will overflow back to the top) */
+        /** sprintf( */
+        /**     wpm_str, "WPM:%03d", */
+        /**     wpm_counter);     // edit the string to change wwhat shows up, */
+        /**                             // edit %03d to change how many digits show up */
+        /** oled_write(wpm_str, false); // writes wpm on top left corner of string */
 
 #endif // WPM_ENABLE
     }
 }
-#endif // OLED_DRIVER_ENABLE
+#endif // OLED_ENABLE
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record)
+bool process_record_user(uint16_t keycode, keyrecord_t* record)
 {
-    if (record->event.pressed)
-    {
-#ifdef OLED_DRIVER_ENABLE
+    if (record->event.pressed) {
+#ifdef OLED_ENABLE
         set_keylog(keycode, record);
 #endif
         // set_timelog();
     }
-    switch (keycode)
-    {
-        case QWERTZ:
-            if (record->event.pressed)
-            {
-                layer_clear();
-                set_single_persistent_default_layer(_QWERTZ);
-            }
-            return false;
-            break;
-        case DVORAK:
-            if (record->event.pressed)
-            {
-                set_single_persistent_default_layer(_DVORAK);
-            }
-            return false;
-            break;
-        case LOWER:
-            if (record->event.pressed)
-            {
-                layer_on(_LOWER);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
-            }
-            else
-            {
-                layer_off(_LOWER);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
-            }
-            return false;
-            break;
-        case RAISE:
-            if (record->event.pressed)
-            {
-                layer_on(_RAISE);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
-            }
-            else
-            {
-                layer_off(_RAISE);
-                update_tri_layer(_LOWER, _RAISE, _ADJUST);
-            }
-            return false;
-            break;
-        case NAV:
-            if (record->event.pressed)
-            {
-                layer_on(_NAV);
-            }
-            else
-            {
-                layer_off(_NAV);
-            }
-            return false;
-            break;
+    switch (keycode) {
+    case QWERTZ:
+        if (record->event.pressed) {
+            layer_clear();
+            set_single_persistent_default_layer(_QWERTZ);
+        }
+        return false;
+        break;
+    case LOWER:
+        if (record->event.pressed) {
+            layer_on(_LOWER);
+            /** update_tri_layer(_LOWER, _RAISE, _ADJUST); */
+        } else {
+            layer_off(_LOWER);
+            /** update_tri_layer(_LOWER, _RAISE, _ADJUST); */
+        }
+        return false;
+        break;
+    case RAISE:
+        if (record->event.pressed) {
+            layer_on(_RAISE);
+            /** update_tri_layer(_LOWER, _RAISE, _ADJUST); */
+        } else {
+            layer_off(_RAISE);
+            /** update_tri_layer(_LOWER, _RAISE, _ADJUST); */
+        }
+        return false;
+        break;
+    case NAV:
+        if (record->event.pressed) {
+            layer_on(_NAV);
+        } else {
+            layer_off(_NAV);
+        }
+        return false;
+        break;
     }
     return true;
 }

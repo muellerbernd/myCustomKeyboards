@@ -1,15 +1,16 @@
 #pragma once
-
 #ifdef AUDIO_ENABLE
-    #define STARTUP_SONG SONG(PLANCK_SOUND)
-    // #define STARTUP_SONG SONG(NO_SOUND)
+#define AUDIO_INIT_DELAY
+#define STARTUP_SONG SONG(STARTUP_SOUND)
+#define GOODBYE_SONG SONG(GOODBYE_SOUND)
+// #define STARTUP_SONG SONG(NO_SOUND)
 
-    #define DEFAULT_LAYER_SONGS { SONG(QWERTY_SOUND), \
-                                  SONG(COLEMAK_SOUND), \
-                                  SONG(DVORAK_SOUND) \
-                                }
+#define DEFAULT_LAYER_SONGS                                                    \
+    {                                                                          \
+        SONG(QWERTY_SOUND), SONG(COLEMAK_SOUND), SONG(DVORAK_SOUND),           \
+            SONG(COLEMAK_SOUND)                                                \
+    }
 #endif
-
 /*
  * MIDI options
  */
@@ -18,7 +19,7 @@
    - MIDI notes can be sent when in Music mode is on
 */
 
-#define MIDI_BASIC
+// #define MIDI_BASIC
 
 /* enable advanced MIDI features:
    - MIDI notes can be added to the keymap
@@ -28,9 +29,14 @@
 */
 //#define MIDI_ADVANCED
 
-/* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
+/* override number of MIDI tone keycodes (each octave adds 12 keycodes and
+ * allocates 12 bytes) */
 //#define MIDI_TONE_KEYCODE_OCTAVES 2
 
 // Most tactile encoders have detents every 4 stages
-#define ENCODER_RESOLUTION 4
-
+// #define ENCODER_RESOLUTION 4
+//
+#define MUSIC_MASK (keycode != KC_NO)
+//  If your board is too loud for you or your coworkers, you can set the max
+//  using
+#define AUDIO_DAC_SAMPLE_MAX 4095U

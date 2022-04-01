@@ -16,7 +16,7 @@ BOOTLOADER = atmel-dfu
 #   the appropriate keymap folder that will get included automatically
 #
 BOOTMAGIC_ENABLE = no     # Virtual DIP switch configuration
-MOUSEKEY_ENABLE = yes       # Mouse keys
+MOUSEKEY_ENABLE = no       # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 CONSOLE_ENABLE = no         # Console for debug
 COMMAND_ENABLE = no        # Commands for debug and configuration
@@ -37,4 +37,3 @@ LAYOUTS_HAS_RGB = no
 SRC += muse.c
 LTO_ENABLE = yes            # significantly reduce the compiled size, but disable the legacy TMK Macros and Functions features
 EXTRAFLAGS += -flto
-

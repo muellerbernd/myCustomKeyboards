@@ -2,7 +2,7 @@
  * File              : config.h
  * Author            : Bernd Müller <bernd@muellerbernd.de>
  * Date              : 29.11.2021
- * Last Modified Date: 07.01.2022
+ * Last Modified Date: 27.03.2022
  * Last Modified By  : Bernd Müller <bernd@muellerbernd.de>
  */
 #include "config_common.h"
@@ -32,15 +32,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SOFT_SERIAL_PIN D2
 
 #undef RGBLED_NUM
-/* ws2812 RGB LED */
-#define RGB_DI_PIN D4
-#define RGBLED_NUM 10
+/* SK6812 RGB LED */
+#define RGB_DI_PIN D3
 
-#ifdef ENCODER_ENABLE
-#define ENCODERS_PAD_A { F4 }
-#define ENCODERS_PAD_B { F5 }
-#define ENCODERS_PAD_A_RIGHT { F5 }
-#define ENCODERS_PAD_B_RIGHT { F4 }
-#define ENCODER_RESOLUTION 4
-#endif // ENCODER_ENABLE
-
+#ifdef RGBLIGHT_ENABLE
+#define RGBLED_NUM 30 // Total number of LEDs
+#define RGBLED_SPLIT                                                           \
+    {                                                                          \
+        15, 15                                                                 \
+    } // LEDs per side
+#define RGBLIGHT_SPLIT
+// #define RGBLIGHT_LIMIT_VAL 80
+#endif
+// Limit the power draw
+#define RGBLIGHT_LIMIT_VAL 150

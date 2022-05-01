@@ -157,6 +157,33 @@ enum custom_keycodes
   )
 #define LAYOUT_3x5_2_base_wrapper(...)       LAYOUT_split_3x5_2_base(__VA_ARGS__)
 
+
+#define LAYOUT_PLANCK_grid( \
+    k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, k0a, k0b, \
+    k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, k1a, k1b, \
+    k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, k2a, k2b, \
+    k30, k31, k32, k33, k34, k35, k36, k37, k38, k39, k3a, k3b \
+) \
+{ \
+    { k00, k01, k02, k03, k04, k05, k06, k07, k08, k09, k0a, k0b }, \
+    { k10, k11, k12, k13, k14, k15, k16, k17, k18, k19, k1a, k1b }, \
+    { k20, k21, k22, k23, k24, k25, k26, k27, k28, k29, k2a, k2b }, \
+    { k30, k31, k32, k33, k34, k35, k36, k37, k38, k39, k3a, k3b } \
+}
+
+#define LAYOUT_PLANCK_grid_wrapper(...)      LAYOUT_PLANCK_grid(__VA_ARGS__)
+#define LAYOUT_PLANCK_grid_hr_base( \
+    k01, k02, k03, k04, k05, k06, k07, k08, k09, k0a, \
+    k11, k12, k13, k14, k15, k16, k17, k18, k19, k1a, \
+    k21, k22, k23, k24, k25, k26, k27, k28, k29, k2a \
+) \
+LAYOUT_PLANCK_grid_wrapper( \
+     KC_ESC , k01        , k02        , k03        , k04        , k05  , k06   , k07        , k08        , k09        , k0a        , DE_UDIA , \
+     CTAB   , LGUI_T(k11), LALT_T(k12), LCTL_T(k13), LSFT_T(k14), k15  , k16   , LSFT_T(k17), LCTL_T(k18), LALT_T(k19), LGUI_T(k1a), ATPI , \
+     KC_LSFT, k21        , k22        , k23        , k24        , k25  , k26   , k27        , k28        , k29        , k2a        , KC_RSFT , \
+     BACKLIT, KC_LCTL    , T_ADAP     , KC_LGUI    , T_DEL      , T_SPC, T_BSPC, T_ENT      , KC_LEFT    , KC_DOWN    , KC_UP      , KC_RIGHT \
+)
+#define LAYOUT_PLANCK_grid_hr_base_wrapper(...)       LAYOUT_PLANCK_grid_hr_base(__VA_ARGS__)
 // clang-format on
 
 /* Qwerty Layer */

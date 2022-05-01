@@ -1,7 +1,9 @@
+#!/bin/bash
 mkdir ~/qmk_firmware/keyboards/bernd
-ln -s planck/keymaps/bernd/ ~/qmk_firmware/keyboards/planck/keymaps
-ln -s myHelidox/ ~/qmk_firmware/keyboards/bernd/
-ln -s myKimiko/ ~/qmk_firmware/keyboards/bernd/
-ln -s ferris/ ~/qmk_firmware/keyboards/bernd/
-ln -s mySweep/ ~/qmk_firmware/keyboards/bernd/
-ln -s muellerbernd/ ~/qmk_firmware/users/
+ln -sfn ${PWD}/planck/keymaps/bernd/ ~/qmk_firmware/keyboards/planck/keymaps
+ln -sfn ${PWD}/helidox/ ~/qmk_firmware/keyboards/bernd/
+ln -sfn ${PWD}/kimiko/ ~/qmk_firmware/keyboards/bernd/
+ln -sfn ${PWD}/ferris/ ~/qmk_firmware/keyboards/bernd/
+ln -sfn ${PWD}/sweep/ ~/qmk_firmware/keyboards/bernd/
+ln -sfn ${PWD}/skeletyl/ ~/qmk_firmware/keyboards/bernd/
+ln -sfn ${PWD}/muellerbernd/ ~/qmk_firmware/users/

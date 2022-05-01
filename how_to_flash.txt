@@ -1,0 +1,13 @@
+qmk flash -kb handwired/myHelidox -km bernd_luna
+qmk flash -kb planck/rev4 -km bernd
+
+cd ~/qmk_firmware/
+make bernd/myHelidox:bernd_luna:avrdude-split-left
+make bernd/myHelidox:bernd_luna:avrdude-split-right
+
+make bernd/myKimiko:bernd_luna:dfu-split-left
+make bernd/myKimiko:bernd_luna:dfu-split-right
+
+make bernd/ferris/sweep:bernd:dfu-split-left
+make bernd/ferris/sweep:bernd:dfu-split-left
+make bernd/ferris/sweep:bernd:dfu-split-right
